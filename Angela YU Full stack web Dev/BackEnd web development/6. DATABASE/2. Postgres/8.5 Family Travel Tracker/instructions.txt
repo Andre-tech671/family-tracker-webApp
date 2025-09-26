@@ -1,0 +1,10 @@
+Moify index.js to add the multi-user functionality
+find a way to fetch the data(country_code and color) for the selected user in the tab
+Link the users and visited_countries tables. The users table should contain user names and their colour for the map.
+
+
+Hint you may nee to recreate some tables 
+change the queries to join certain tables in the index.js
+figure out how to query for the current users data 
+You will need to write code under the "/user" "new" and "add" routes
+try using the RETURNING keyword to return data that was inserted
