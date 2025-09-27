@@ -10,6 +10,65 @@ const db = new pg.Client({
 });
 db.connect();
 
+async function initializeDatabase() {
+  try {
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS countries (
+        country_code CHAR(2) PRIMARY KEY,
+        country_name VARCHAR(50)
+      );
+    `);
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS users(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(15) UNIQUE NOT NULL,
+        color VARCHAR(15)
+      );
+    `);
+    await db.query(`
+      CREATE TABLE IF NOT EXISTS visited_countries(
+        id SERIAL PRIMARY KEY,
+        country_code CHAR(2) NOT NULL,
+        user_id INTEGER REFERENCES users(id)
+      );
+    `);
+    // Insert initial countries data if empty (add more as needed for full functionality)
+    const countryResult = await db.query("SELECT COUNT(*) FROM countries");
+    if (parseInt(countryResult.rows[0].count) === 0) {
+      await db.query(`
+        INSERT INTO countries (country_code, country_name) VALUES
+        ('FR', 'France'),
+        ('GB', 'United Kingdom'),
+        ('CA', 'Canada'),
+        ('US', 'United States'),
+        ('DE', 'Germany'),
+        ('IT', 'Italy'),
+        ('ES', 'Spain'),
+        ('JP', 'Japan'),
+        ('AU', 'Australia'),
+        ('BR', 'Brazil')
+        -- Add more countries for complete search functionality
+      `);
+    }
+    // Insert initial data if users table is empty
+    const userResult = await db.query("SELECT COUNT(*) FROM users");
+    if (parseInt(userResult.rows[0].count) === 0) {
+      await db.query(`
+        INSERT INTO users (name, color)
+        VALUES ('Angela', 'teal'), ('Jack', 'powderblue');
+      `);
+      await db.query(`
+        INSERT INTO visited_countries (country_code, user_id)
+        VALUES ('FR', 1), ('GB', 1), ('CA', 2), ('FR', 2);
+      `);
+    }
+  } catch (err) {
+    console.error("Error initializing database:", err);
+  }
+}
+
+await initializeDatabase();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
