@@ -6,11 +6,7 @@ const app = express();
 const port = 3000;
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "world",
-  password: "Andre2002,,",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
 });
 db.connect();
 
