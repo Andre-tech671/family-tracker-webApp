@@ -1,0 +1,24 @@
+- [x] Add authentication check in Player.jsx to redirect to /login if user is not logged in
+- [ ] Test the changes by running the app and clicking a movie poster
+- [ ] Code Review Findings and Fixes:
+  - [ ] Firebase.js: Move hardcoded Firebase API key to environment variables (.env file) for security.
+  - [ ] Firebase.js: Remove console.log and console.error statements; replace with proper logging if needed.
+  - [ ] Firebase.js: Improve error handling for user-friendly messages.
+  - [ ] TitleCards.jsx: Move TMDB API key to environment variables.
+  - [ ] TitleCards.jsx: Remove console.error; handle errors gracefully (e.g., show error message).
+  - [ ] TitleCards.jsx: Clean up event listener in useEffect return function.
+  - [ ] TitleCards.jsx: Add proper alt text to images.
+  - [ ] TitleCards.jsx: Use card.id as key instead of index.
+  - [ ] Player.jsx: Move TMDB API key to environment variables.
+  - [ ] Player.jsx: Remove console.error; handle errors gracefully.
+  - [ ] Player.jsx: Add alt text to back arrow image.
+  - [ ] Navbar.jsx: Replace direct DOM manipulation with React state for dropdown.
+  - [ ] Navbar.jsx: Clean up scroll event listener in useEffect return.
+  - [ ] Navbar.jsx: Fix alt texts for icons (e.g., bell_icon should be "Notifications").
+  - [ ] Login.jsx: Add alt text to logo.
+  - [ ] Login.jsx: Associate label with checkbox using id.
+  - [ ] Login.jsx: Add password validation (e.g., minimum length).
+  - [ ] App.jsx: Remove console.log statements.
+  - [ ] App.jsx: Fix comment from // App.js to // App.jsx.
+  - [ ] Run ESLint to check for additional issues.
+  - [ ] Test the app after fixes.
